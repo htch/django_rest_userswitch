@@ -1,0 +1,18 @@
+{% extends "rest_framework/base.html" %}
+
+{% block userlinks %}
+{{ block.super }}
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Switch User
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        {% for user in available_users %}
+        <li><a href="{% url 'userswitch:loginas' pk=user.id %}?redirect_to={{ request.path }}">
+            {% if user == request.user %}&bull;{% endif %}
+            {{ user }}</a></li>
+        {% endfor %}
+    </ul>
+</li>
+{% endblock %}

@@ -1,0 +1,21 @@
+from django.contrib.auth import get_user_model
+from django.conf import settings
+from rest_framework.renderers import BrowsableAPIRenderer
+
+
+class BrowsableAPIRenderer(BrowsableAPIRenderer):
+    template = 'userswitch/api.html'
+
+    def get_context(self, *args, **kwargs):
+        context = super(BrowsableAPIRenderer, self).get_context(*args, **kwargs)
+        if not hasattr(settings, 'USERSWITCH_ENABLE') or settings.USERSWITCH_ENABLE == False:
+            return context
+        if not hasattr(settings, 'USERSWITCH_WHITELIST'):
+            context['available_users'] = get_user_model().objects.all()
+        else:
+            user = get_user_model()
+            if hasattr(user, 'USERNAME_FIELD'):
+                context['available_users'] = user.objects.filter(**{user.USERNAME_FIELD + '__in': settings.USERSWITCH_WHITELIST})
+            else:
+                context['available_users'] = user.objects.filter(username__in=settings.USERSWITCH_WHITELIST)
+        return context
