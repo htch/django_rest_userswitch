@@ -11,7 +11,7 @@ setup(
     url='https://github.com/htch/django_rest_userswitch',
     license='None',
     description='Instant user switching widget for django rest framework browsable api',
-    long_description=open('README').read(),
+    long_description=open('README.md').read(),
     zip_safe=False,
     include_package_data=True,
 )
