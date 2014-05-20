@@ -11,7 +11,10 @@ class BrowsableAPIRenderer(BrowsableAPIRenderer):
         if not hasattr(settings, 'USERSWITCH_ENABLE') or settings.USERSWITCH_ENABLE == False:
             return context
         if not hasattr(settings, 'USERSWITCH_WHITELIST'):
-            context['available_users'] = get_user_model().objects.filter(is_active=True)
+            if hasattr(settings, 'ANONYMOUS_USER_ID'):      # filtering out django-guardian's AnonymousUser
+                context['available_users'] = get_user_model().objects.filter(is_active=True).exclude(pk=settings.ANONYMOUS_USER_ID)
+            else:
+                context['available_users'] = get_user_model().objects.filter(is_active=True)
         else:
             user = get_user_model()
             if hasattr(user, 'USERNAME_FIELD'):

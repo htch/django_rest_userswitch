@@ -3,9 +3,9 @@ django_rest_userswitch
 
 Instant user switching widget for django rest framework browsable API. Adds a handy widget to switch between different users in one click.
 
-**DISCLAIMER: only use it in test environments**
+**DISCLAIMER: only use this app in testing environments**
 
-![screenshot](https://raw.github.com/htch/django_rest_userswitch/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/htch/django_rest_userswitch/master/screenshot.png)
 
 Installation
 ============
@@ -24,6 +24,6 @@ Configuration
 
 So far the app only supports two configuration variables:
 
-`USERSWITCH_ENABLE`: set to `True` to enable user switching widget; comment it out to turn off user switch functionality.
+`USERSWITCH_ENABLE`: set to `True` to enable user switching widget; comment it out to turn off this app.
 
 `USERSWITCH_WHITELIST`: set to a tuple of usernames that you want to see in the user switching dropdown; by default displays all available users. You can use this with `USERNAME_FIELD`.
