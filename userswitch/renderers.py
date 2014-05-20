@@ -11,7 +11,7 @@ class BrowsableAPIRenderer(BrowsableAPIRenderer):
         if not hasattr(settings, 'USERSWITCH_ENABLE') or settings.USERSWITCH_ENABLE == False:
             return context
         if not hasattr(settings, 'USERSWITCH_WHITELIST'):
-            context['available_users'] = get_user_model().objects.all()
+            context['available_users'] = get_user_model().objects.filter(is_active=True)
         else:
             user = get_user_model()
             if hasattr(user, 'USERNAME_FIELD'):
